@@ -1,0 +1,19 @@
+GET http://localhost:5000/api/cars
+
+###
+
+GET http://localhost:5000/api/cars/1
+
+###
+
+POST http://localhost:5000/api/cars
+Content-Type: application/json
+
+###
+
+PUT http://localhost:5000/api/cars
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:5000/api/cars/1
