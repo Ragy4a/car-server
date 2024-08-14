@@ -6,19 +6,19 @@ const PORT = process.env.SERVER_PORT
 
 const server = createServer(app);
 
-const { types, cars } = require('./src/constants');
-const { Type, Car } = require('./src/models');
+// const { types, cars } = require('./src/constants');
+// const { Type, Car } = require('./src/models');
 
-const createData = async (model, data) => {
-    try {
-        const result = await model.create(data);
-        console.log(`${result.length} records added successfully!`);
-        return result;
-    } catch (error) {
-        console.error('Error adding data:', error);
-        throw error;
-    }
-};
+// const createData = async (model, data) => {
+//     try {
+//         const result = await model.create(data);
+//         console.log(`${result.length} records added successfully!`);
+//         return result;
+//     } catch (error) {
+//         console.error('Error adding data:', error);
+//         throw error;
+//     }
+// };
 
 // createData(Type, types);
 // createData(Car, cars);

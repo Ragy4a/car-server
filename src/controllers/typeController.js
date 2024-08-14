@@ -43,9 +43,9 @@ class TypeController {
 
     updateType = async (req, res, next) => {
         try {
-            const { id, name } = req.body; 
+            const { _id, name } = req.body; 
             const updatedType = await Type.findByIdAndUpdate(
-                id,
+                _id,
                 name,
                 { new: true } 
             ).exec();

@@ -15,6 +15,7 @@ router
         .put(validateCar, carController.updateCar);
 router
     .route('/:id')
+        .get(carController.getCarById)
         .patch(validatePatchCar, carController.patchCar)
         .delete(carController.deleteCar);
 

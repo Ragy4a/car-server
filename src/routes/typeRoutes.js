@@ -14,6 +14,7 @@ router
         .put(validateType, typeController.updateType);
 router
     .route('/:id')
+        .get(typeController.getTypeById)
         .delete(typeController.deleteType);
 
 module.exports = router;
