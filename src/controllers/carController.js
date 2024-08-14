@@ -48,13 +48,14 @@ class CarController {
     createCar = async (req, res, next) => {
         try {
             const { body, file } = req;
+            const logo = file ? file.filename : null;
             const type = await Type.findOne({ name: body.type });
             if (!type) {
                 return next(createError(404, 'Type not found!'));
             }
             const newCar = new Car({
                 ...body,
-                logo: file ? file.path : '',
+                logo,
                 typeId: type._id
             });
             if(!newCar) {
@@ -71,6 +72,7 @@ class CarController {
     updateCar = async (req, res, next) => {
         try {
             const { file, body } = req;
+            const logo = file ? file.filename : null;
             const type = await Type.findOne({ name: body.type });
             if (!type) {
                 return next(createError(404, 'Type not found!'));
@@ -79,7 +81,7 @@ class CarController {
                 body._id,
                 {
                     ...body,
-                    logo: file ? file.path : body.logo,
+                    logo,
                     typeId: type._id
                 },
                 { new: true, runValidators: true }
@@ -96,7 +98,10 @@ class CarController {
 
     patchCar = async (req, res, next) => {
         try {
-            const { params: { id }, body } = req;
+            const { params: { id }, body, file } = req;
+            if (file) {
+                body.logo = file.filename;
+            }
             if (body.type) {
                 const type = await Type.findOne({ name: body.type });
                 if (!type) {

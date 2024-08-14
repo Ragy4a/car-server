@@ -42,10 +42,10 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:5000/api/cars/66bc024889a18e0186a657a7
+PATCH http://localhost:5000/api/cars/66bbf5682718121a1f3fe32a
 
 {
-  "type": "Концепты"
+  "type": "Концепты",
 }
 
 ###

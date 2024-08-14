@@ -18,7 +18,7 @@ module.exports = {
             bodywork_type: 'Седан',
             gear_type: 'Автомат',
             new: true,
-            logo: 'uploads/toyota_camry.png',
+            logo: null,
             typeId: '66b9804945c346146bf30305',
         },
         {
@@ -30,7 +30,7 @@ module.exports = {
             bodywork_type: 'Внедорожник',
             gear_type: 'Автомат',
             new: false,
-            logo: 'uploads/bmw_x5.png',
+            logo: null,
             typeId: '66b9804945c346146bf30302',
         },
     ]

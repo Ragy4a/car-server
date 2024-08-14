@@ -47,7 +47,7 @@ class TypeController {
             const updatedType = await Type.findByIdAndUpdate(
                 _id,
                 name,
-                { new: true } 
+                { new: true, runValidators: true, } 
             ).exec();
             if (!updatedType) {
                 return next(createError(404, 'Type not found!'));
