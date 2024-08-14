@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
-const typeSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const typeSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
   },
-});
+  {
+    versionKey: false,
+  }
+);
 
 module.exports = mongoose.model('Type', typeSchema);

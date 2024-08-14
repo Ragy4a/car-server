@@ -1,5 +1,5 @@
 const createError = require('http-errors');
-const Type = require('../models/types');
+const { Type } = require('../models');
 
 class TypeController {
 
@@ -43,29 +43,11 @@ class TypeController {
 
     updateType = async (req, res, next) => {
         try {
-            const { params: { id }, body } = req; 
+            const { id, name } = req.body; 
             const updatedType = await Type.findByIdAndUpdate(
                 id,
-                body,
+                name,
                 { new: true } 
-            ).exec();
-            if (!updatedType) {
-                return next(createError(404, 'Type not found!'));
-            }
-            res.status(200).json(updatedType);
-        } catch (error) {
-            console.log(error.message);
-            next(error);
-        }
-    }
-
-    patchType = async (req, res, next) => {
-        try {
-            const { params: { id }, body } = req;
-            const updatedType = await Type.findByIdAndUpdate(
-                id,
-                { $set: body },
-                { new: true, runValidators: true }
             ).exec();
             if (!updatedType) {
                 return next(createError(404, 'Type not found!'));

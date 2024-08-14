@@ -9,11 +9,44 @@ GET http://localhost:5000/api/cars/1
 POST http://localhost:5000/api/cars
 Content-Type: application/json
 
+{
+  "brand": "Toyota",
+  "model": "Camry",
+  "year": "2021-01-01",
+  "color": "Черный",
+  "engine_type": "Бензин",
+  "bodywork_type": "Седан",
+  "gear_type": "Автомат",
+  "new": true,
+  "type": "Концепты"
+}
+
 ###
 
 PUT http://localhost:5000/api/cars
 Content-Type: application/json
 
+{
+    "_id": "66bbf5682718121a1f3fe32a",
+    "brand": "Mercedes",
+    "model": "ML 350",
+    "year": "1970-01-01T00:00:02.021Z",
+    "color": "Белый",
+    "engine_type": "Бензин",
+    "bodywork_type": "Седан",
+    "gear_type": "Автомат",
+    "new": true,
+    "logo": null,
+    "type": "Кроссоверы"
+}
+
 ###
 
-DELETE http://localhost:5000/api/cars/1
+PATCH http://localhost:5000/api/cars/66bbf52d2718121a1f3fe323
+
+{
+  "type": "Концепты"
+}
+
+###
+DELETE http://localhost:5000/api/cars/66bbf4289ce435bc0251fb22

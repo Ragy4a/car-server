@@ -4,18 +4,16 @@ const router = new Router();
 const typeController = require('../controllers/typeController');
 
 const {
-    pagination: { paginateData },
-    validation: { validateType, validatePatchType }
+    validation: { validateType }
 } = require('../middlewares');
 
 router
     .route('/')
-        .get(paginateData, typeController.getAllTypes)
+        .get(typeController.getAllTypes)
         .post(validateType, typeController.createType)
         .put(validateType, typeController.updateType);
 router
     .route('/:id')
-        .patch(validatePatchType, typeController.patchType)
         .delete(typeController.deleteType);
 
 module.exports = router;

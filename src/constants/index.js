@@ -19,7 +19,7 @@ module.exports = {
             gear_type: 'Автомат',
             new: true,
             logo: 'uploads/toyota_camry.png',
-            typeId: null,
+            typeId: '66b9804945c346146bf30305',
         },
         {
             brand: 'BMW',
@@ -31,7 +31,7 @@ module.exports = {
             gear_type: 'Автомат',
             new: false,
             logo: 'uploads/bmw_x5.png',
-            typeId: null,
+            typeId: '66b9804945c346146bf30302',
         },
     ]
 }

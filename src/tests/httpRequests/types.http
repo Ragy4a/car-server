@@ -2,18 +2,27 @@ GET http://localhost:5000/api/types
 
 ###
 
-GET http://localhost:5000/api/types/1
+GET http://localhost:5000/api/types/66b9804945c346146bf30305
 
 ###
 
 POST http://localhost:5000/api/types
 Content-Type: application/json
 
+{
+    "name": "Тест"
+}
+
 ###
 
 PUT http://localhost:5000/api/types
 Content-Type: application/json
 
+{
+    "_id": "66b9815573e38ebc65d1402e",
+    "name": "Обновленный"
+}
+
 ###
 
-DELETE http://localhost:5000/api/types/1
+DELETE http://localhost:5000/api/types/

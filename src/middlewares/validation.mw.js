@@ -3,7 +3,6 @@ const {
     CAR_VALIDATION_SCHEMA,
     TYPE_VALIDATION_SCHEMA,
     CAR_PATCH_VALIDATION_SCHEMA,
-    TYPE_PATCH_VALIDATION_SCHEMA
 } = require('../utils/validationSchemas');
 
 const validateSchema = (schema) => async (req, res, next) => {
@@ -20,4 +19,3 @@ const validateSchema = (schema) => async (req, res, next) => {
 module.exports.validateCar = validateSchema(CAR_VALIDATION_SCHEMA);
 module.exports.validateType = validateSchema(TYPE_VALIDATION_SCHEMA);
 module.exports.validatePatchCar = validateSchema(CAR_PATCH_VALIDATION_SCHEMA);
-module.exports.validatePatchType = validateSchema(TYPE_PATCH_VALIDATION_SCHEMA);

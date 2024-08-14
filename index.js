@@ -20,6 +20,9 @@ const createData = async (model, data) => {
     }
 };
 
+// createData(Type, types);
+// createData(Car, cars);
+
 server.listen(PORT, HOST_NAME, () => {
     console.log(`Server running on 'http://${HOST_NAME}:${PORT}'.`)
 })

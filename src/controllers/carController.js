@@ -1,8 +1,7 @@
 const createError = require('http-errors');
-const Car = require('../models/cars');
+const { Car, Type } = require('../models');
 
 class CarController {
-
     getAllCars = async (req, res, next) => {
         try {
             const { offset, limit } = req.pagination;
@@ -11,10 +10,16 @@ class CarController {
                 .limit(limit)
                 .skip(offset)
                 .exec();
+
             if (!cars || cars.length === 0) {
                 return next(createError(404, 'Cars not found!'));
-            }
-            res.status(200).json(cars);
+            }         
+            const carsData = cars.map(car => ({
+                ...car.toObject(),
+                type: car.typeId.name,
+                typeId: undefined
+            }));
+            res.status(200).json(carsData);
         } catch (error) {
             console.log(error.message);
             next(error);
@@ -28,7 +33,12 @@ class CarController {
             if (!car) {
                 return next(createError(404, 'Car not found!'));
             }
-            res.status(200).json(car);
+            const carData = {
+                ...car.toObject(),
+                type: car.typeId.name,
+                typeId: undefined 
+            };
+            res.status(200).json(carData);
         } catch (error) {
             console.log(error.message);
             next(error);
@@ -38,15 +48,20 @@ class CarController {
     createCar = async (req, res, next) => {
         try {
             const { body, file } = req;
+            const type = await Type.findOne({ name: body.type });
+            if (!type) {
+                return next(createError(404, 'Type not found!'));
+            }
             const newCar = new Car({
                 ...body,
                 logo: file ? file.path : '',
+                typeId: type._id
             });
-            if (!newCar) {
+            if(!newCar) {
                 return next(createError(404, 'Car not created!'));
-            };
-            await newCar.save();
-            res.status(201).json(newCar);
+            }
+            const savedCar = await newCar.save();
+            res.status(201).json(savedCar);
         } catch (error) {
             console.log(error.message);
             next(error);
@@ -56,17 +71,22 @@ class CarController {
     updateCar = async (req, res, next) => {
         try {
             const { file, body } = req;
+            const type = await Type.findOne({ name: body.type });
+            if (!type) {
+                return next(createError(404, 'Type not found!'));
+            }
             const updatedCar = await Car.findByIdAndUpdate(
-                    body.id,
+                body._id,
                 {
                     ...body,
                     logo: file ? file.path : body.logo,
+                    typeId: type._id
                 },
-                { new: true }
+                { new: true, runValidators: true }
             ).populate('typeId');
             if (!updatedCar) {
                 return next(createError(404, 'Car not found!'));
-            };
+            }
             res.status(200).json(updatedCar);
         } catch (error) {
             console.log(error.message);
@@ -77,6 +97,13 @@ class CarController {
     patchCar = async (req, res, next) => {
         try {
             const { params: { id }, body } = req;
+            if (body.type) {
+                const type = await Type.findOne({ name: body.type });
+                if (!type) {
+                    return next(createError(404, 'Type not found!'));
+                }
+                body.typeId = type._id;
+            }
             const updatedCar = await Car.findByIdAndUpdate(
                 id,
                 { $set: body },
@@ -85,7 +112,12 @@ class CarController {
             if (!updatedCar) {
                 return next(createError(404, 'Car not found!'));
             }
-            res.status(200).json(updatedCar);
+            const carData = {
+                ...updatedCar.toObject(),
+                type: updatedCar.typeId.name,
+                typeId: undefined 
+            };
+            res.status(200).json(carData);
         } catch (error) {
             console.log(error.message);
             next(error);
@@ -105,6 +137,6 @@ class CarController {
             next(error);
         }
     }
-};
+}
 
 module.exports = new CarController();
