@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const env = process.env.NODE_ENV || 'development';
 const basename = path.basename(__filename);
-const pathToConfig = require(path.resolve('.sequelizerc')).config;
+const pathToConfig = path.resolve('src', 'configs', 'mongodbConfig.js');
 const config = require(pathToConfig)[env];
 
 mongoose

@@ -5,7 +5,7 @@ class CarController {
     getAllCars = async (req, res, next) => {
         try {
             const { offset, limit } = req.pagination;
-            const cars = await Car.find()
+            const cars = await Car.find({}, 'model -_id')
                 .populate('typeId')
                 .limit(limit)
                 .skip(offset)
@@ -17,7 +17,7 @@ class CarController {
             const carsData = cars.map(car => ({
                 ...car.toObject(),
                 type: car.typeId.name,
-                typeId: undefined
+                typeId: undefined,
             }));
             res.status(200).json(carsData);
         } catch (error) {
